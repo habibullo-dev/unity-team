@@ -1,4 +1,4 @@
-package redditgroup.cardgame;
+package unity.cardgame;
 /*
  * Texas Holdem Program
  * 
@@ -17,6 +17,7 @@ import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 class TH extends JFrame {
+
 	JPanel dealerPanel;
 	JPanel playerPanel;
 	JPanel communityPanel;
@@ -54,7 +55,7 @@ class TH extends JFrame {
 		super(name);
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setLayout(null);
-		setBackground(new Color(0, 100, 0));
+		super.getContentPane().setBackground(new Color(53, 101, 77));
 
 		player = new PokerHand();
 		dealer = new PokerHand();
@@ -76,17 +77,20 @@ class TH extends JFrame {
 		dealerLabel.setText("Dealer Cards");
 		dealerLabel.setHorizontalAlignment(JLabel.CENTER);
 		dealerLabel.setBounds(5, 5, dealerPanel.getWidth(), 20);
+		dealerLabel.setForeground(Color.WHITE); // Set the color of the text to white
 
 		final JLabel communityLabel = new JLabel();
 		communityLabel.setText("Community Cards");
 		communityLabel.setHorizontalAlignment(JLabel.CENTER);
 		communityLabel.setBounds(dealerLabel.getWidth() + 5, 5, communityPanel.getWidth(), 20);
+		communityLabel.setForeground(Color.WHITE); // Set the color of the text to white
 
 		final JLabel playerLabel = new JLabel();
 		playerLabel.setText("Player Cards");
 		playerLabel.setHorizontalAlignment(JLabel.CENTER);
 		playerLabel.setBounds(5, buttonsPanel.getBounds().y + buttonsPanel.getHeight() + 5, buttonsPanel.getWidth(),
 				25);
+		playerLabel.setForeground(Color.WHITE); // Set the color of the text to white
 
 		console = new JLabel();
 		console.setHorizontalAlignment(JLabel.CENTER);
@@ -94,6 +98,7 @@ class TH extends JFrame {
 		console.setBounds(5, playerPanel.getBounds().y + playerPanel.getHeight() + 5, buttonsPanel.getWidth(), 25);
 		console.setBackground(Color.white);
 		console.setText("- Welcome to Texas Hold'em!!! -");
+		console.setForeground(Color.WHITE);
 
 		add(dealerLabel);
 		add(dealerPanel);
@@ -115,6 +120,7 @@ class TH extends JFrame {
 		playerPanel.setBorder(sunkIn);
 
 		playerPanel.setBounds(205, 217, 161, 107);
+		playerPanel.setBackground(new Color(72, 120, 96));
 
 		System.out.println("Player Panel Bounds: " + playerPanel.getBounds());
 
@@ -178,6 +184,7 @@ class TH extends JFrame {
 		communityPanel.setBorder(sunkIn);
 
 		communityPanel.setBounds(181, 30, 395, 107);
+		communityPanel.setBackground(new Color(72, 120, 96));
 		System.out.println("Community Panel Bounds :" + communityPanel.getBounds());
 	}
 
@@ -190,7 +197,7 @@ class TH extends JFrame {
 		dealerPanel.setBorder(sunkIn);
 
 		dealerPanel.setBounds(5, 30, 161, 107); // Set size of dealer panel to fit cards perfectly
-
+		dealerPanel.setBackground(new Color(72, 120, 96)); // Set the background color of the dealer panel
 		System.out.println("Dealer Panel Bounds: " + dealerPanel.getBounds());
 
 	}
@@ -312,6 +319,12 @@ class TH extends JFrame {
 
 	public void endGame() {
 		showCards();
+		// Sleep for three seconds
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		deal.setEnabled(true);
 		bet.setEnabled(false);
 		call.setEnabled(false);
@@ -499,9 +512,11 @@ class TH extends JFrame {
 						if (playerValue[0] == dealerValue[0]) {
 							if (playerValue[1] > dealerValue[1]) {
 								console.setText("You win $" + pot + " with a " + player.showPokerValue());
+
 								endGame();
 							} else if (playerValue[1] < dealerValue[1]) {
 								console.setText("You lose $" + pot + " to a " + dealer.showPokerValue());
+
 								endGame();
 							} else {
 								console.setText("It's a tie!");
@@ -509,9 +524,11 @@ class TH extends JFrame {
 							}
 						} else if (playerValue[0] > dealerValue[0]) {
 							console.setText("You win $" + pot + " with a " + player.showPokerValue());
+
 							endGame();
 						} else if (playerValue[0] < dealerValue[0]) {
 							console.setText("You lose $" + pot + " to a " + dealer.showPokerValue());
+
 							endGame();
 						}
 					}
@@ -535,14 +552,5 @@ class TH extends JFrame {
 		window.setSize(590, 387);
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-		/*
-		 * window.addComponentListener(new ComponentAdapter() {
-		 * 
-		 * @Override
-		 * public void componentResized(ComponentEvent e) {
-		 * System.out.println(window.getSize());
-		 * }
-		 * });
-		 */
 	}
 }

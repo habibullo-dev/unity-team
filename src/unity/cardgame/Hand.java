@@ -1,4 +1,4 @@
-package redditgroup.cardgame;
+package unity.cardgame;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package redditgroup.cardgame;
+package unity.cardgame;
 
 public class Deck {
 	private Card [] deck;
